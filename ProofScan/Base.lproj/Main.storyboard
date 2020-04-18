@@ -1,65 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tLt-jw-Ar9">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search Text-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ProofScan" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SearchTextViewController" customModule="ProofScan" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uap-h6-fvt">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l8t-RP-t7P">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="Search Text" id="Koz-wB-2Pu">
+                                        <barButtonItem key="rightBarButtonItem" title="Search" id="0KE-qn-kBC">
+                                            <connections>
+                                                <action selector="searchButtonTapped:" destination="BYZ-38-t0r" id="D2b-PP-ViA"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Search Text" image="magnifyingglass.circle" catalog="system" id="IAF-wF-wfr"/>
                     <connections>
-                        <outlet property="cameraView" destination="Uap-h6-fvt" id="XnD-F0-iuN"/>
+                        <outlet property="imageView" destination="Uap-h6-fvt" id="iED-Jt-vlQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="116.51785714285714"/>
+            <point key="canvasLocation" x="457" y="883"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="d6Q-gt-WKo">
+        <!--Proofread-->
+        <scene sceneID="sX8-o1-SlI">
             <objects>
-                <viewController id="61T-TO-Jvh" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="QVO-UK-f3o">
+                <viewController id="VTf-o9-OOb" customClass="ProofreadViewController" customModule="ProofScan" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8Tv-MJ-OOV">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Yi-WO-gjC">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Proofread" id="44n-4l-chm">
+                                        <barButtonItem key="rightBarButtonItem" title="Start Scan" id="iwe-AQ-L65"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-yI-QQi">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="z42-H1-fEV"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Proofread" image="textformat.abc.dottedunderline" catalog="system" id="9nH-jI-GhY"/>
+                    <connections>
+                        <outlet property="imageView" destination="ScK-yI-QQi" id="L3L-UJ-kWo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l9d-4u-icD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1318.840579710145" y="882.58928571428567"/>
+        </scene>
+        <!--Setting-->
+        <scene sceneID="0s7-3b-EEP">
+            <objects>
+                <viewController id="des-5T-vyR" customClass="SettingViewController" customModule="ProofScan" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1Pq-9Z-tV5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="JUM-ZD-0q2"/>
+                        <viewLayoutGuide key="safeArea" id="zAy-Mf-osd"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Setting" image="gear" catalog="system" id="NmS-Pb-ihM"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Vda-Zy-ucE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Teq-ms-ih3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1087" y="117"/>
+            <point key="canvasLocation" x="2191" y="883"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="IJg-Tr-Lil">
+        <!--Proof Scan Tab Bar Controller-->
+        <scene sceneID="dlS-pm-eDs">
             <objects>
-                <viewController id="hbT-J1-CCD" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SAy-qE-vrL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="pdb-eC-0Pa"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VLJ-Zw-yxd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tabBarController id="tLt-jw-Ar9" customClass="ProofScanTabBarController" customModule="ProofScan" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WxX-ji-tPf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="h4d-TM-aXT"/>
+                        <segue destination="VTf-o9-OOb" kind="relationship" relationship="viewControllers" id="xly-yb-yKs"/>
+                        <segue destination="des-5T-vyR" kind="relationship" relationship="viewControllers" id="NsM-TC-Bbg"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ySn-S8-Qlo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2032" y="117"/>
+            <point key="canvasLocation" x="1319" y="157"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gear" catalog="system" width="128" height="119"/>
+        <image name="magnifyingglass.circle" catalog="system" width="128" height="121"/>
+        <image name="textformat.abc.dottedunderline" catalog="system" width="128" height="81"/>
+    </resources>
 </document>
