@@ -46,7 +46,7 @@
             </objects>
             <point key="canvasLocation" x="457" y="883"/>
         </scene>
-        <!--Proofread-->
+        <!--Proofread View Controller-->
         <scene sceneID="sX8-o1-SlI">
             <objects>
                 <viewController id="VTf-o9-OOb" customClass="ProofreadViewController" customModule="ProofScan" customModuleProvider="target" sceneMemberID="viewController">
@@ -57,9 +57,21 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Yi-WO-gjC">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem title="Proofread" id="44n-4l-chm">
-                                        <barButtonItem key="rightBarButtonItem" title="Start Scan" id="iwe-AQ-L65"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Start Scan" id="FIG-Aj-xxM">
+                                            <connections>
+                                                <action selector="startScanButtonTapped:" destination="VTf-o9-OOb" id="6eV-kj-wNP"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Result" id="iwe-AQ-L65">
+                                            <connections>
+                                                <action selector="resultButtonTapped:" destination="VTf-o9-OOb" id="8YG-as-Fmc"/>
+                                                <segue destination="3zu-WK-nH9" kind="show" id="HgJ-F5-qzl"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -71,14 +83,31 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="z42-H1-fEV"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Proofread" image="textformat.abc.dottedunderline" catalog="system" id="9nH-jI-GhY"/>
+                    <navigationItem key="navigationItem" id="HvU-5u-YLb"/>
                     <connections>
                         <outlet property="imageView" destination="ScK-yI-QQi" id="L3L-UJ-kWo"/>
+                        <outlet property="startScan" destination="FIG-Aj-xxM" id="Ttl-OX-3zJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l9d-4u-icD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1318.840579710145" y="882.58928571428567"/>
+            <point key="canvasLocation" x="1319" y="1621"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="AXp-eg-my5">
+            <objects>
+                <viewController id="3zu-WK-nH9" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1S0-s3-TEC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Oc2-Dx-EcA"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="GGq-CW-Olh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AmE-6N-Zft" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1319" y="2354"/>
         </scene>
         <!--Setting-->
         <scene sceneID="0s7-3b-EEP">
@@ -94,7 +123,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Teq-ms-ih3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2191" y="883"/>
+            <point key="canvasLocation" x="3100.0000000000005" y="882.58928571428567"/>
         </scene>
         <!--Proof Scan Tab Bar Controller-->
         <scene sceneID="dlS-pm-eDs">
@@ -107,13 +136,32 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="h4d-TM-aXT"/>
-                        <segue destination="VTf-o9-OOb" kind="relationship" relationship="viewControllers" id="xly-yb-yKs"/>
+                        <segue destination="GIO-Ih-8Io" kind="relationship" relationship="viewControllers" id="xly-yb-yKs"/>
                         <segue destination="des-5T-vyR" kind="relationship" relationship="viewControllers" id="NsM-TC-Bbg"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySn-S8-Qlo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1319" y="157"/>
+        </scene>
+        <!--Proofread-->
+        <scene sceneID="eL8-xb-GPQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GIO-Ih-8Io" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Proofread" image="textformat.abc.dottedunderline" catalog="system" id="9nH-jI-GhY"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7wU-Wj-aKL">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VTf-o9-OOb" kind="relationship" relationship="rootViewController" id="Qli-t8-PNx"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bf3-cr-5WK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1318.840579710145" y="882.58928571428567"/>
         </scene>
     </scenes>
     <resources>
