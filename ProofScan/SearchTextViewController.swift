@@ -39,6 +39,8 @@ class SearchTextViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
+        self.searchedText = ""
+        self.imageView.layer.sublayers?.removeSubrange(1...)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -197,6 +199,7 @@ extension SearchTextViewController: AVCaptureVideoDataOutputSampleBufferDelegate
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 6)!, options: requestOptions)
         
         do {
+            //try imageRequestHandler.perform(self.requests)
             try imageRequestHandler.perform(self.requests)
             
         } catch {

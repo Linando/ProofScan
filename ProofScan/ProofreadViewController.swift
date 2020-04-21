@@ -21,12 +21,20 @@ class ProofreadViewController: UIViewController {
     var captureBorderMinY: Float = 9999
     var captureBorderMaxY: Float = 0
     var image: UIImage?
-    var kataYangDisingkat = ["yg", "utk", "km", "sy", "org", "jg", "plg", "tdk", "tp", "ap", "lg", "jd", "ak", "sdh", "kmrn", "mngkn", "lps", ""]
+    var kataYangDisingkat = ["yg", "utk", "km", "sy", "org", "jg", "plg", "tdk", "tp", "ap", "lg", "jd", "ak", "sdh", "kmrn", "mngkn", "lps", "ad", "bs", "nggk", "ngk", "trs"]
     let alphabet = Array("abcdefghijklmnopqrstuvwxyz")
     let number = Array("0123456789")
     let symbol = Array(",\"\'")
     let consonants = CharacterSet.letters.subtracting(CharacterSet(charactersIn: "aiueoy"))
+    var singkatanMistakeString = [""]
+    var titikMistakeString = [""]
+    var komaMistakeString = [""]
+    var multipleMistakeString = [""]
     
+    
+//    var kataTidakBaku = ["adzan", "aktifitas", "analisa", "atlit", "azas", "belagu", "blanko", "cendikiawan", "dekrit", "detil", "diagnosa", "efektifitas", "elit", "ex", "extra", "faksimili", "formil", "frekwensi", "gladi", "gledek", "hakekat", "handal", "hapal", "hembus", "himbau", "himpit", "hipotesa", "hirarki", "hoax", "hutang", "ijasah", "ijin", "indera", "insyaf", "isteri", "jadual", "jaman", "karir", "kharisma", "komoditi", "komplit", "kreatifitas", "kuatir", "kwalitas", "kwantitas", "lahat", "lembab", "lobang", "manejemen", "mensinergikan", "mensosialisasikan", "mensukseskan", "menyolok", "mesjid", "milyar", "nafas", "napsu", "nasehat", "obyek", "obyektif", "pondasi", "popular", "praktek", "propinsi", "rapot", "realita", "resiko", "respon", "sholat/shalat", "standarisasi", "subyek", "subyektif", "tapi", "tekat", "terimakasih"]
+    
+    @IBOutlet weak var resultButton: UIBarButtonItem!
     @IBOutlet weak var startScan: UIBarButtonItem!
     @IBOutlet weak var imageView: UIImageView!
     
@@ -57,36 +65,46 @@ class ProofreadViewController: UIViewController {
         
         startLiveVideo()
         startTextRecognition()
+        resultButton.isEnabled = false
         // Do any additional setup after loading the view.
     }
     
     
     @IBAction func startScanButtonTapped(_ sender: Any) {
-        let settings = AVCapturePhotoSettings()
-        photoOutout?.capturePhoto(with: settings, delegate: self)
+        
         if(self.startScan.title == "Done")
         {
             self.proofreadSession.startRunning()
             self.startScan.title = "Start Scan"
             self.imageView.layer.sublayers?.removeSubrange(1...)
-            proofreadSession.startRunning()
+            self.resultButton.isEnabled = false
+            //proofreadSession.startRunning()
+        }
+        else
+        {
+            let settings = AVCapturePhotoSettings()
+            photoOutout?.capturePhoto(with: settings, delegate: self)
         }
     }
     
-    @IBAction func resultButtonTapped(_ sender: Any) {
-        
-    }
+    
+    
     
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        //self.imageView.layer.sublayers?.removeSubrange(1...)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
         
-        proofreadSession.stopRunning()
+        if startScan.title == "Done"
+        {
+            proofreadSession.stopRunning()
+        }
+        
         
     }
     
@@ -94,11 +112,8 @@ class ProofreadViewController: UIViewController {
     func startLiveVideo() {
         
         proofreadSession.sessionPreset = AVCaptureSession.Preset.high
-        
-        
-        
+
         var captureDevice: AVCaptureDevice?
-        
         
         let cameraDevices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
         for device in cameraDevices.devices {
@@ -118,14 +133,11 @@ class ProofreadViewController: UIViewController {
             print("Error occured \(error)")
             return
         }
-//        let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
-//
-//        proofreadSession.addInput(deviceInput)
+        
         photoOutout = AVCapturePhotoOutput()
         photoOutout?.setPreparedPhotoSettingsArray([AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])], completionHandler: nil)
         proofreadSession.addOutput(photoOutout!)
         
-        //3
         let imageLayer = AVCaptureVideoPreviewLayer(session: proofreadSession)
         imageLayer.videoGravity = .resize
         imageLayer.frame = imageView.bounds
@@ -142,7 +154,7 @@ class ProofreadViewController: UIViewController {
     
     func recognizeTextHandler(request: VNRequest, error: Error?)
     {
-        var observationMistakeCounter = 0
+        var mistakeFlag = ""
         guard let observations = request.results as? [VNRecognizedTextObservation] else {print("no result"); return}
         
         DispatchQueue.main.async()
@@ -151,17 +163,47 @@ class ProofreadViewController: UIViewController {
             self.captureBorderMaxX = 0
             self.captureBorderMinY = 9999
             self.captureBorderMaxY = 0
-            observationMistakeCounter = 0
+            mistakeFlag = ""
+            self.singkatanMistakeString = [""]
+            self.singkatanMistakeString.removeFirst()
+            self.komaMistakeString = [""]
+            self.komaMistakeString.removeFirst()
+            self.titikMistakeString = [""]
+            self.titikMistakeString.removeFirst()
+            
             self.imageView.layer.sublayers?.removeSubrange(1...)
             
             for observation in observations
             {
                 let observationString = observation.topCandidates(1).first?.string
                 var consonantCounter = 0
+                mistakeFlag = ""
                 
                 // kata yang disingkat khusus 3 konsonan++
+                for i in 0...self.kataYangDisingkat.count-1
+                {
+                    if (observationString!.contains(self.kataYangDisingkat[i]))
+                    {
+                        //print("ada singkatan")
+                        //mistakeFlag = "Singkatan"
+                        //self.drawRectangleSingkatan(char: observation)
+                        //self.singkatanMistakeString.append(observationString!)
+                        consonantCounter = 4
+                        break
+                    }
+                }
+                
                 for i in observationString!
                 {
+                    if consonantCounter >= 4
+                    {
+                        print("ada singkatan")
+                        //mistakeFlag = "Singkatan"
+                        self.drawRectangleSingkatan(char: observation)
+                        self.singkatanMistakeString.append(observationString!)
+                        break
+                    }
+                    
                     if (i != "a" && i != "i" && i != "u" && i != "e" && i != "o" && i != "y" && i != "A" && i != "I" && i != "U" && i != "E" && i != "O" && i != "Y" && i != " " && i != "." && i != "," && i != "\"" && i != "0" && i != "2" && i != "3" && i != "4" && i != "5" && i != "6" && i != "7" && i != "8" && i != "9" && i != "(" && i != ")" && i != "!" && i != "?" && i != ":" && i != ";" && i != "[" && i != "]" && i != "{" && i != "}" && i != "/" && i != "\\" && i != "<" && i != ">")
                     {
                         consonantCounter += 1
@@ -170,12 +212,7 @@ class ProofreadViewController: UIViewController {
                         consonantCounter = 0
                     }
                     
-                    if consonantCounter >= 3
-                    {
-                        print("ada singkatan")
-                        self.drawRectangleSingkatan(char: observation)
-                        break
-                    }
+                    
                 }
                 
                 
@@ -185,65 +222,121 @@ class ProofreadViewController: UIViewController {
                     if (observationString!.contains(".\(self.alphabet[i])")) || (observationString!.contains(". \(self.alphabet[i])"))
                     {
                         print("salah titik")
+//                        if mistakeFlag != ""
+//                        {
+//                            mistakeFlag = "Multiple"
+//                        }
+//                        else
+//                        {
+//                            mistakeFlag = "Titik"
+//                        }
                         self.drawRectangleTitik(char: observation)
+                        self.titikMistakeString.append(observationString!)
+                        break
                     }
                 }
                 
                 
                 // spasi setelah koma
-                guard let indexOfComa = observationString?.firstIndex(of: ",") else {continue}
-                guard let indexAfterComa = observationString?.index(after: indexOfComa) else {continue}
-                if observationString![indexAfterComa] != " " && observationString![indexAfterComa] != "\"" &&
-                    observationString![indexAfterComa] != "\'"
+                if (observationString?.contains(","))!
                 {
-                    print("salah koma")
-                    self.drawRectangleKoma(char: observation)
+                    let indexOfComa = observationString?.firstIndex(of: ",")
+                    if let indexAfterComa = observationString?.index(after: indexOfComa!)
+                    {
+                        if observationString![indexAfterComa] != " " && observationString![indexAfterComa] != "\"" &&
+                            observationString![indexAfterComa] != "\'"
+                        {
+                            print("salah koma")
+//                            if mistakeFlag != ""
+//                            {
+//                                mistakeFlag = "Multiple"
+//                            }
+//                            else
+//                            {
+//                                mistakeFlag = "Koma"
+//                            }
+                            self.drawRectangleKoma(char: observation)
+                            self.komaMistakeString.append(observationString!)
+                        }
+                    }
                 }
+                
+                
+                //print(mistakeFlag)
+                print(observationString)
+//                if mistakeFlag == "Singkatan"
+//                {
+//                    self.drawRectangleSingkatan(char: observation)
+//                }
+//                else if mistakeFlag == "Titik"
+//                {
+//                    self.drawRectangleTitik(char: observation)
+//                }
+//                else if mistakeFlag == "Koma"
+//                {
+//                    self.drawRectangleKoma(char: observation)
+//                }
+//                else if mistakeFlag == "Multiple"
+//                {
+//                    self.drawRectangleMultipleMistake(char: observation)
+//                }
+                
             }
+            
         }
         
     }
     
-    
-    func drawRectangle(char : VNRecognizedTextObservation) {
-        
-        let myWidth = imageView.frame.size.width
-        let myHeight = imageView.frame.size.height
-        
-        let layerRect = CALayer()
-        var rect = char.boundingBox
-        
-        rect.origin.x *= myWidth
-        rect.size.height *= myHeight
-        rect.origin.y = ((1 - rect.origin.y) * myHeight) - rect.size.height
-        rect.size.width *= myWidth
-        
-        if(Float(rect.minX) <= self.captureBorderMinX)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? ResultViewController
         {
-            self.captureBorderMinX = Float(rect.minX)
+            vc.mistakeKomaStringResult = komaMistakeString
+            vc.mistakeTitikStringResult = titikMistakeString
+            vc.mistakeSingkatanStringResult = singkatanMistakeString
         }
-        
-        if(Float(rect.maxX) >= self.captureBorderMaxX)
-        {
-            self.captureBorderMaxX = Float(rect.maxX)
-        }
-        
-        if(Float(rect.minY) <= self.captureBorderMinY)
-        {
-            self.captureBorderMinY = Float(rect.minY)
-        }
-        if(Float(rect.maxY) >= self.captureBorderMaxY)
-        {
-            self.captureBorderMaxY = Float(rect.maxY)
-        }
-        
-        layerRect.frame = rect
-        layerRect.borderWidth = 2
-        layerRect.borderColor = UIColor.cyan.cgColor
-        layerRect.cornerRadius = 2
-        layerRect.opacity = 0.5
-        self.imageView.layer.addSublayer(layerRect)
     }
+    
+    
+    
+//    func drawRectangleMultipleMistake(char : VNRecognizedTextObservation) {
+//
+//        let myWidth = imageView.frame.size.width
+//        let myHeight = imageView.frame.size.height
+//
+//        let layerRect = CALayer()
+//        var rect = char.boundingBox
+//
+//        rect.origin.x *= myWidth
+//        rect.size.height *= myHeight
+//        rect.origin.y = ((1 - rect.origin.y) * myHeight) - rect.size.height
+//        rect.size.width *= myWidth
+//
+//        if(Float(rect.minX) <= self.captureBorderMinX)
+//        {
+//            self.captureBorderMinX = Float(rect.minX)
+//        }
+//
+//        if(Float(rect.maxX) >= self.captureBorderMaxX)
+//        {
+//            self.captureBorderMaxX = Float(rect.maxX)
+//        }
+//
+//        if(Float(rect.minY) <= self.captureBorderMinY)
+//        {
+//            self.captureBorderMinY = Float(rect.minY)
+//        }
+//        if(Float(rect.maxY) >= self.captureBorderMaxY)
+//        {
+//            self.captureBorderMaxY = Float(rect.maxY)
+//        }
+//
+//        layerRect.frame = rect
+//        layerRect.borderWidth = 2
+//        layerRect.borderColor = UIColor.red.cgColor
+//        layerRect.cornerRadius = 2
+//        layerRect.opacity = 0.5
+//        self.imageView.layer.addSublayer(layerRect)
+//    }
     
     func drawRectangleSingkatan(char : VNRecognizedTextObservation) {
         
@@ -319,7 +412,7 @@ class ProofreadViewController: UIViewController {
         
         layerRect.frame = rect
         layerRect.borderWidth = 2
-        layerRect.borderColor = UIColor.blue.cgColor
+        layerRect.borderColor = UIColor.yellow.cgColor
         layerRect.cornerRadius = 2
         layerRect.opacity = 0.5
         self.imageView.layer.addSublayer(layerRect)
@@ -359,7 +452,7 @@ class ProofreadViewController: UIViewController {
         
         layerRect.frame = rect
         layerRect.borderWidth = 2
-        layerRect.borderColor = UIColor.green.cgColor
+        layerRect.borderColor = UIColor.blue.cgColor
         layerRect.cornerRadius = 2
         layerRect.opacity = 0.5
         self.imageView.layer.addSublayer(layerRect)
@@ -369,40 +462,19 @@ class ProofreadViewController: UIViewController {
 
 
 
-extension ProofreadViewController: AVCaptureVideoDataOutputSampleBufferDelegate, AVCapturePhotoCaptureDelegate
+extension ProofreadViewController: AVCapturePhotoCaptureDelegate
 {
-//    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-//
-//        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
-//            return
-//        }
-//
-//        var requestOptions:[VNImageOption : Any] = [:]
-//
-//        if let camData = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, attachmentModeOut: nil) {
-//            requestOptions = [.cameraIntrinsics:camData]
-//        }
-//
-//        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 6)!, options: requestOptions)
-//
-//        do {
-//            try imageRequestHandler.perform(self.requests)
-//        } catch {
-//            print(error)
-//        }
-//    }
-    
-    
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        
         if let imageData = photo.fileDataRepresentation()
         {
-            
             self.proofreadSession.stopRunning()
             image = UIImage(data: imageData)
             self.imageView.image = self.image
             let handler = VNImageRequestHandler(data: imageData, options: [:])
             try? handler.perform(self.requests)
             self.startScan.title = "Done"
+            self.resultButton.isEnabled = true
         }
         
     }

@@ -68,8 +68,7 @@
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Result" id="iwe-AQ-L65">
                                             <connections>
-                                                <action selector="resultButtonTapped:" destination="VTf-o9-OOb" id="8YG-as-Fmc"/>
-                                                <segue destination="3zu-WK-nH9" kind="show" id="HgJ-F5-qzl"/>
+                                                <segue destination="G2t-pT-Ovh" kind="show" id="ymf-Iw-Uhm"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -86,6 +85,7 @@
                     <navigationItem key="navigationItem" id="HvU-5u-YLb"/>
                     <connections>
                         <outlet property="imageView" destination="ScK-yI-QQi" id="L3L-UJ-kWo"/>
+                        <outlet property="resultButton" destination="iwe-AQ-L65" id="Ecb-Bc-YQv"/>
                         <outlet property="startScan" destination="FIG-Aj-xxM" id="Ttl-OX-3zJ"/>
                     </connections>
                 </viewController>
@@ -93,21 +93,34 @@
             </objects>
             <point key="canvasLocation" x="1319" y="1621"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="AXp-eg-my5">
+        <!--Result-->
+        <scene sceneID="5r4-Qp-FEG">
             <objects>
-                <viewController id="3zu-WK-nH9" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1S0-s3-TEC">
+                <tableViewController id="G2t-pT-Ovh" customClass="ResultViewController" customModule="ProofScan" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uMl-Kt-dM3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="Oc2-Dx-EcA"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="GGq-CW-Olh"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AmE-6N-Zft" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="hnq-l4-mpV">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hnq-l4-mpV" id="pgT-tX-a4e">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="G2t-pT-Ovh" id="VHj-0H-ff6"/>
+                            <outlet property="delegate" destination="G2t-pT-Ovh" id="CIG-Sz-HmC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Result" id="J15-hz-22D"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T4K-1k-7pn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1319" y="2354"/>
+            <point key="canvasLocation" x="1319" y="2349"/>
         </scene>
         <!--Setting-->
         <scene sceneID="0s7-3b-EEP">

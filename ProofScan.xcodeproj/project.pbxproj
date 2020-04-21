@@ -10,6 +10,8 @@
 		D2F2E537244A110A00612473 /* ProofreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E536244A110A00612473 /* ProofreadViewController.swift */; };
 		D2F2E539244A111700612473 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E538244A111700612473 /* SettingViewController.swift */; };
 		D2F2E53B244A136600612473 /* ProofScanTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E53A244A136600612473 /* ProofScanTabBarController.swift */; };
+		D2F2E5C9244E4D6D00612473 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E5C8244E4D6D00612473 /* ResultViewController.swift */; };
+		D2F2E5CB244E4EF500612473 /* MistakeDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E5CA244E4EF500612473 /* MistakeDetail.swift */; };
 		D2FEA0D424349310004A6D17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEA0D324349310004A6D17 /* AppDelegate.swift */; };
 		D2FEA0D624349310004A6D17 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEA0D524349310004A6D17 /* SceneDelegate.swift */; };
 		D2FEA0D824349310004A6D17 /* SearchTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FEA0D724349310004A6D17 /* SearchTextViewController.swift */; };
@@ -23,6 +25,8 @@
 		D2F2E536244A110A00612473 /* ProofreadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofreadViewController.swift; sourceTree = "<group>"; };
 		D2F2E538244A111700612473 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		D2F2E53A244A136600612473 /* ProofScanTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofScanTabBarController.swift; sourceTree = "<group>"; };
+		D2F2E5C8244E4D6D00612473 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		D2F2E5CA244E4EF500612473 /* MistakeDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MistakeDetail.swift; sourceTree = "<group>"; };
 		D2FEA0D024349310004A6D17 /* ProofScan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProofScan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2FEA0D324349310004A6D17 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2FEA0D524349310004A6D17 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,8 +72,10 @@
 				D2FEA0D524349310004A6D17 /* SceneDelegate.swift */,
 				D2FEA0D724349310004A6D17 /* SearchTextViewController.swift */,
 				D2FEA0D924349310004A6D17 /* Main.storyboard */,
+				D2F2E5C8244E4D6D00612473 /* ResultViewController.swift */,
 				D2F2E53A244A136600612473 /* ProofScanTabBarController.swift */,
 				D2F2E536244A110A00612473 /* ProofreadViewController.swift */,
+				D2F2E5CA244E4EF500612473 /* MistakeDetail.swift */,
 				D2F2E538244A111700612473 /* SettingViewController.swift */,
 				D2FEA0DF24349313004A6D17 /* Assets.xcassets */,
 				D2FEA0E124349313004A6D17 /* LaunchScreen.storyboard */,
@@ -153,6 +159,8 @@
 				D2F2E537244A110A00612473 /* ProofreadViewController.swift in Sources */,
 				D2FEA0D824349310004A6D17 /* SearchTextViewController.swift in Sources */,
 				D2FEA0DE24349310004A6D17 /* ProofScan.xcdatamodeld in Sources */,
+				D2F2E5C9244E4D6D00612473 /* ResultViewController.swift in Sources */,
+				D2F2E5CB244E4EF500612473 /* MistakeDetail.swift in Sources */,
 				D2F2E53B244A136600612473 /* ProofScanTabBarController.swift in Sources */,
 				D2FEA0D424349310004A6D17 /* AppDelegate.swift in Sources */,
 				D2FEA0D624349310004A6D17 /* SceneDelegate.swift in Sources */,
