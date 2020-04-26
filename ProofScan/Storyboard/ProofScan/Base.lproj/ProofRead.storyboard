@@ -1,39 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GIO-Ih-8Io">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Proofread View Controller-->
+        <!--Proofread-->
         <scene sceneID="sX8-o1-SlI">
             <objects>
                 <viewController id="VTf-o9-OOb" customClass="ProofreadViewController" customModule="ProofScan" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Tv-MJ-OOV">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Yi-WO-gjC">
-                                <rect key="frame" x="0.0" y="44" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <navigationItem title="Proofread" id="44n-4l-chm">
-                                        <barButtonItem key="leftBarButtonItem" title="Start Scan" id="FIG-Aj-xxM">
-                                            <connections>
-                                                <action selector="startScanButtonTapped:" destination="VTf-o9-OOb" id="6eV-kj-wNP"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Result" id="iwe-AQ-L65">
-                                            <connections>
-                                                <segue destination="G2t-pT-Ovh" kind="show" id="ymf-Iw-Uhm"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ScK-yI-QQi">
                                 <rect key="frame" x="0.0" y="88" width="414" height="725"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -42,23 +23,35 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="z42-H1-fEV"/>
                     </view>
-                    <navigationItem key="navigationItem" id="HvU-5u-YLb"/>
+                    <navigationItem key="navigationItem" title="Proofread" largeTitleDisplayMode="never" id="HvU-5u-YLb">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="ymI-JN-w5d"/>
+                        <barButtonItem key="leftBarButtonItem" title="Scan" id="S4d-a9-oEJ">
+                            <connections>
+                                <action selector="startScanButtonTapped:" destination="VTf-o9-OOb" id="HVk-4O-BGO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Results" id="aUU-de-Gke">
+                            <connections>
+                                <segue destination="G2t-pT-Ovh" kind="show" id="Spw-vK-AXX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="ScK-yI-QQi" id="L3L-UJ-kWo"/>
-                        <outlet property="resultButton" destination="iwe-AQ-L65" id="Ecb-Bc-YQv"/>
-                        <outlet property="startScan" destination="FIG-Aj-xxM" id="Ttl-OX-3zJ"/>
+                        <outlet property="resultButton" destination="aUU-de-Gke" id="ZTb-5h-Tx2"/>
+                        <outlet property="startScan" destination="S4d-a9-oEJ" id="Eyj-pU-1fi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l9d-4u-icD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1319" y="1621"/>
         </scene>
-        <!--Result-->
+        <!--Results-->
         <scene sceneID="5r4-Qp-FEG">
             <objects>
                 <tableViewController id="G2t-pT-Ovh" customClass="ResultViewController" customModule="ProofScan" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="uMl-Kt-dM3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -76,7 +69,7 @@
                             <outlet property="delegate" destination="G2t-pT-Ovh" id="CIG-Sz-HmC"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Result" id="J15-hz-22D"/>
+                    <navigationItem key="navigationItem" title="Results" largeTitleDisplayMode="always" id="J15-hz-22D"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T4K-1k-7pn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -91,6 +84,12 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7wU-Wj-aKL">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -102,6 +101,7 @@
             <point key="canvasLocation" x="1318.840579710145" y="882.58928571428567"/>
         </scene>
     </scenes>
+    <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
         <image name="textformat.abc.dottedunderline" catalog="system" width="128" height="81"/>
     </resources>

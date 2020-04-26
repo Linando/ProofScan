@@ -62,6 +62,7 @@
             <point key="canvasLocation" x="3100.0000000000005" y="882.58928571428567"/>
         </scene>
     </scenes>
+    <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
     <resources>
         <image name="gear" catalog="system" width="128" height="119"/>
     </resources>

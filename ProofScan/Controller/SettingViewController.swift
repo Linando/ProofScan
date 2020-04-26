@@ -22,9 +22,31 @@ class SettingViewController: UIViewController {
         super.viewDidLoad()
         
     }
-
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        guard previousTraitCollection?.userInterfaceStyle != traitCollection.userInterfaceStyle else {
+            return
+        }
+        checkTheme()
+    }
+    
+    func checkTheme() {
+        ///chech if theme is dark or light
+        switch self.traitCollection.userInterfaceStyle {
+        case .light, .unspecified:
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.systemBlue]
+            
+        case .dark:
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.systemPink]
+        default:
+            assertionFailure("Unknown Interface")
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        checkTheme()
     }
 }
 
@@ -38,6 +60,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         /// test cell
 
         let cell = UITableViewCell()
+        
         cell.textLabel?.text = "About"
         cell.accessoryType = .disclosureIndicator
         
@@ -45,6 +68,9 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
+        
         tableView.deselectRow(at: IndexPath.init(row: indexPath.row, section: indexPath.section), animated: true)
     }
     
