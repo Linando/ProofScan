@@ -50,7 +50,7 @@ class ProofreadViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        //navigationController?.setNavigationBarHidden(true, animated: animated)
         //navigationController?.navigationBar.backgroundColor = .white
        
         
@@ -479,5 +479,3 @@ extension ProofreadViewController: AVCapturePhotoCaptureDelegate
         
     }
 }
-
-

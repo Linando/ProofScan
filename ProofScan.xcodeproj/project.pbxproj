@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD46B9B7244F50890014B992 /* SearchText.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD46B9B5244F50890014B992 /* SearchText.storyboard */; };
+		BD46B9BA244F50C70014B992 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD46B9B8244F50C70014B992 /* Settings.storyboard */; };
+		BD46B9BD244F50EF0014B992 /* ProofRead.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BD46B9BB244F50EF0014B992 /* ProofRead.storyboard */; };
 		D2F2E537244A110A00612473 /* ProofreadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E536244A110A00612473 /* ProofreadViewController.swift */; };
 		D2F2E539244A111700612473 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E538244A111700612473 /* SettingViewController.swift */; };
 		D2F2E53B244A136600612473 /* ProofScanTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2F2E53A244A136600612473 /* ProofScanTabBarController.swift */; };
@@ -22,6 +25,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD46B9B6244F50890014B992 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ProofScan/Base.lproj/SearchText.storyboard; sourceTree = "<group>"; };
+		BD46B9B9244F50C70014B992 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ProofScan/Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
+		BD46B9BC244F50EF0014B992 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = ProofScan/Base.lproj/ProofRead.storyboard; sourceTree = "<group>"; };
 		D2F2E536244A110A00612473 /* ProofreadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofreadViewController.swift; sourceTree = "<group>"; };
 		D2F2E538244A111700612473 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		D2F2E53A244A136600612473 /* ProofScanTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProofScanTabBarController.swift; sourceTree = "<group>"; };
@@ -49,6 +55,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD46B9BE244F50FA0014B992 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				D2FEA0D924349310004A6D17 /* Main.storyboard */,
+				BD46B9B8244F50C70014B992 /* Settings.storyboard */,
+				BD46B9BB244F50EF0014B992 /* ProofRead.storyboard */,
+				BD46B9B5244F50890014B992 /* SearchText.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		BD8ACFBE244F520300B1F8B9 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D2FEA0D724349310004A6D17 /* SearchTextViewController.swift */,
+				D2F2E5C8244E4D6D00612473 /* ResultViewController.swift */,
+				D2F2E53A244A136600612473 /* ProofScanTabBarController.swift */,
+				D2F2E536244A110A00612473 /* ProofreadViewController.swift */,
+				D2F2E5CA244E4EF500612473 /* MistakeDetail.swift */,
+				D2F2E538244A111700612473 /* SettingViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		D2FEA0C724349310004A6D17 = {
 			isa = PBXGroup;
 			children = (
@@ -68,15 +98,10 @@
 		D2FEA0D224349310004A6D17 /* ProofScan */ = {
 			isa = PBXGroup;
 			children = (
+				BD8ACFBE244F520300B1F8B9 /* Controller */,
+				BD46B9BE244F50FA0014B992 /* Storyboard */,
 				D2FEA0D324349310004A6D17 /* AppDelegate.swift */,
 				D2FEA0D524349310004A6D17 /* SceneDelegate.swift */,
-				D2FEA0D724349310004A6D17 /* SearchTextViewController.swift */,
-				D2FEA0D924349310004A6D17 /* Main.storyboard */,
-				D2F2E5C8244E4D6D00612473 /* ResultViewController.swift */,
-				D2F2E53A244A136600612473 /* ProofScanTabBarController.swift */,
-				D2F2E536244A110A00612473 /* ProofreadViewController.swift */,
-				D2F2E5CA244E4EF500612473 /* MistakeDetail.swift */,
-				D2F2E538244A111700612473 /* SettingViewController.swift */,
 				D2FEA0DF24349313004A6D17 /* Assets.xcassets */,
 				D2FEA0E124349313004A6D17 /* LaunchScreen.storyboard */,
 				D2FEA0E424349313004A6D17 /* Info.plist */,
@@ -144,8 +169,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2FEA0E324349313004A6D17 /* LaunchScreen.storyboard in Resources */,
+				BD46B9BD244F50EF0014B992 /* ProofRead.storyboard in Resources */,
 				D2FEA0E024349313004A6D17 /* Assets.xcassets in Resources */,
 				D2FEA0DB24349310004A6D17 /* Main.storyboard in Resources */,
+				BD46B9B7244F50890014B992 /* SearchText.storyboard in Resources */,
+				BD46B9BA244F50C70014B992 /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,6 +199,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		BD46B9B5244F50890014B992 /* SearchText.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD46B9B6244F50890014B992 /* Base */,
+			);
+			name = SearchText.storyboard;
+			sourceTree = "<group>";
+		};
+		BD46B9B8244F50C70014B992 /* Settings.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD46B9B9244F50C70014B992 /* Base */,
+			);
+			name = Settings.storyboard;
+			sourceTree = "<group>";
+		};
+		BD46B9BB244F50EF0014B992 /* ProofRead.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD46B9BC244F50EF0014B992 /* Base */,
+			);
+			name = ProofRead.storyboard;
+			sourceTree = "<group>";
+		};
 		D2FEA0D924349310004A6D17 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -309,7 +361,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5538968945;
+				DEVELOPMENT_TEAM = VZX6G92869;
 				INFOPLIST_FILE = ProofScan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -327,7 +379,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 5538968945;
+				DEVELOPMENT_TEAM = VZX6G92869;
 				INFOPLIST_FILE = ProofScan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

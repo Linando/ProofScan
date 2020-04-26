@@ -23,6 +23,19 @@ class SearchTextViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     
+    var check = true
+    @IBOutlet weak var flashOutlet: UIBarButtonItem!
+    @IBAction func flashBtn(_ sender: UIBarButtonItem) {
+        check = !check
+        
+        switch check {
+        case true:
+            turnFlash(on: true)
+        case false:
+            turnFlash(on: false)
+        }
+        
+    }
     
     override func viewDidLayoutSubviews() {
         imageView.layer.sublayers?[0].frame = imageView.bounds
@@ -41,6 +54,10 @@ class SearchTextViewController: UIViewController {
         super.viewWillDisappear(true)
         self.searchedText = ""
         self.imageView.layer.sublayers?.removeSubrange(1...)
+        
+        
+        flashOutlet.image = UIImage(systemName: "bolt.slash")
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -96,17 +113,43 @@ class SearchTextViewController: UIViewController {
     }
     
     
+    //MARK: - Flash Camera Function
+    func turnFlash(on: Bool) {
+        guard let avDevice = AVCaptureDevice.default(for: .video) else { return }
+
+        if avDevice.hasTorch {
+        /// kalo device ada flash
+        do {
+            try avDevice.lockForConfiguration()
+            if on == true {
+                flashOutlet.image = UIImage(systemName: "bolt.fill")
+                    avDevice.torchMode = .on
+                } else {
+                    avDevice.torchMode = .off
+                    flashOutlet.image = UIImage(systemName: "bolt.slash")
+                }
+
+                avDevice.unlockForConfiguration()
+            } catch {
+                /// error
+                print(error)
+            }
+        } else {
+            print("Device tidak ada flash")
+        }
+        
+    }
+
+    //MARK: - Start Text Recognition Function
     func startTextRecognition(){
         let textRequest = VNRecognizeTextRequest(completionHandler: self.recognizeTextHandler)
         textRequest.usesLanguageCorrection = false
         textRequest.customWords = ["susut", "luntur", " Penerima"]
         self.requests = [textRequest]
-        
 
     }
     
-    
-    
+    //MARK: - Recognize Text Handler
     func recognizeTextHandler(request: VNRequest, error: Error?)
     {
         if(self.searchedText != "")
