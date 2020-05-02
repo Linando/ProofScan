@@ -37,6 +37,7 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
     var currentImage: UIImage!
     
     var tempObservations = [VNRecognizedTextObservation]()
+    var tempObservationString = [""]
     var observationResults = [VNRecognizedTextObservation]()
     //var tempObservation: VNRecognizedTextObservation
     
@@ -235,13 +236,50 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                 //                    }
                 //                    print(observation.topCandidates(1).first?.string)
 
-                
+//                if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
+//                {
+//                    var IgnorePunctuationTemp = self.tempObservations
+//                    self.tempObservations = []
+//                    for observation in IgnorePunctuationTemp
+//                    {
+//                        self.tempObservations.append(observation)
+//                        self.tempObservationString.append(observation.topCandidates(1).first!.string)
+//                    }
+//                }
+//
+//
+//                if UserDefaults.standard.bool(forKey: "ImageIgnoreWhiteSpace") == true
+//                {
+//                    var IgnoreWhiteSpaceTemp = self.tempObservations
+//                    self.tempObservations = []
+//                    for observation in IgnoreWhiteSpaceTemp
+//                    {
+//                        var temp = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
+//                        for word in temp!
+//                        {
+//                            if word.suffix(self.searchedText.count).lowercased() == self.searchedText.lowercased()
+//                            {
+//                                self.tempObservations.append(observation)
+//                            }
+//                        }
+//                    }
+//                }
                     
                 if UserDefaults.standard.bool(forKey: "ImageMatchCase") == true
                 {
                     for observation in observations
                     {
-                        if(observation.topCandidates(1).first?.string.contains(self.searchedText))!
+                        var temp = observation.topCandidates(1).first?.string
+                        if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
+                        {
+                            temp?.removeAll(where: {$0.isPunctuation})
+                        }
+                        if UserDefaults.standard.bool(forKey: "ImageIgnoreWhiteSpace") == true
+                        {
+                            temp?.removeAll(where: {$0.isWhitespace})
+                        }
+                        
+                        if(temp!.contains(self.searchedText))
                         {
                             //self.drawRectangle(char: observation)
                             self.tempObservations.append(observation)
@@ -260,11 +298,22 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                     self.tempObservations = []
                     for observation in wholeWordTemp
                     {
-                        var temp = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
-                        if (temp?.contains(self.searchedText.lowercased()))!
+                        var wholeWordString = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
+                        
+                        for eachWord in wholeWordString!
                         {
-                            self.tempObservations.append(observation)
+                            var temp = eachWord
+                            if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
+                            {
+                                temp.removeAll(where: {$0.isPunctuation})
+                            }
+                            
+                            if (temp.contains(self.searchedText.lowercased()))
+                            {
+                                self.tempObservations.append(observation)
+                            }
                         }
+                        
                     }
                 }
                 
@@ -278,7 +327,14 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                         var temp = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
                         for word in temp!
                         {
-                            if word.prefix(self.searchedText.count).lowercased() == self.searchedText.lowercased()
+                            
+                            var matchPrefixString = word
+                            if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
+                            {
+                                matchPrefixString.removeAll(where: {$0.isPunctuation})
+                            }
+                            
+                            if matchPrefixString.prefix(self.searchedText.count).lowercased() == self.searchedText.lowercased()
                             {
                                 self.tempObservations.append(observation)
                             }
@@ -296,6 +352,12 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                         var temp = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
                         for word in temp!
                         {
+                            var matchSuffixString = word
+                            if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
+                            {
+                                matchSuffixString.removeAll(where: {$0.isPunctuation})
+                            }
+                            
                             if word.suffix(self.searchedText.count).lowercased() == self.searchedText.lowercased()
                             {
                                 self.tempObservations.append(observation)
@@ -305,31 +367,8 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                 }
                 
                 
-//                if UserDefaults.standard.bool(forKey: "ImageWholeWord") == true && self.tempObservations != []
-//                {
-//                    var wholeWordTempObservations = self.tempObservations
-//                    self.tempObservations = []
-//
-//                    for tempObservation in wholeWordTempObservations
-//                    {
-//                        var temp = tempObservation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
-//                        if (temp?.contains(self.searchedText.lowercased()))!
-//                        {
-//                            self.tempObservations.append(tempObservation)
-//                        }
-//                    }
-//                }
-//                else if UserDefaults.standard.bool(forKey: "ImageWholeWord") == true && self.tempObservations == []
-//                {
-//                    for observation in observations
-//                    {
-//                        var temp = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
-//                        if (temp?.contains(self.searchedText.lowercased()))!
-//                        {
-//                            self.tempObservations.append(observation)
-//                        }
-//                    }
-//                }
+                
+                
                 
                 
                 for x in self.tempObservations
@@ -337,40 +376,8 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                     
                     self.drawRectangle(char: x)
                 }
-                
-//
-//
-//                for observation in observations
-//                {
-//                    if UserDefaults.standard.bool(forKey: "ImageMatchSuffix") == true
-//                    {
-//
-//                    }
-//                    else{
-//                        break
-//                    }
-//                }
-//
-//                for observation in observations
-//                {
-//                   if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
-//                    {
-//
-//                    }else{
-//                        break
-//                    }
-//                }
-//
-//                for observation in observations
-//                {
-//                    if UserDefaults.standard.bool(forKey: "ImageIgnoreWhiteSpace") == true
-//                    {
-//
-//                    }
-//                    else{
-//                        break
-//                    }
-//                }
+
+
             }
         }
     }
