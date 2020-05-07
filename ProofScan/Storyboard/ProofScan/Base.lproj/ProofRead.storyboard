@@ -2,12 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GIO-Ih-8Io">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Proofread-->
+        <!--Image Scan-->
         <scene sceneID="sX8-o1-SlI">
             <objects>
                 <viewController id="VTf-o9-OOb" customClass="ProofreadViewController" customModule="ProofScan" customModuleProvider="target" sceneMemberID="viewController">
@@ -55,14 +55,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="z42-H1-fEV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Proofread" id="44n-4l-chm">
+                    <navigationItem key="navigationItem" title="Image Scan" id="44n-4l-chm">
                         <barButtonItem key="leftBarButtonItem" title="Advanced" id="FIG-Aj-xxM">
+                            <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="startScanButtonTapped:" destination="VTf-o9-OOb" id="6eV-kj-wNP"/>
                                 <segue destination="9de-yG-m7B" kind="show" id="ny2-6N-zXH"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Search" id="iwe-AQ-L65">
+                            <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="resultButtonTapped:" destination="VTf-o9-OOb" id="vow-iL-5t0"/>
                             </connections>

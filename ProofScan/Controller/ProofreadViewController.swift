@@ -118,6 +118,13 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                     try? handler2.perform(self.requests)
                 }
                 
+                
+                if UserDefaults.standard.bool(forKey: "HapticFeedback") == true
+                {
+                    let generator = UINotificationFeedbackGenerator()
+                    generator.notificationOccurred(.success)
+                }
+                
             }
         }))
         alert.addTextField(configurationHandler: { textField in
@@ -264,8 +271,7 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
 //                        }
 //                    }
 //                }
-                    
-                if UserDefaults.standard.bool(forKey: "ImageMatchCase") == true
+                if (UserDefaults.standard.bool(forKey: "ImageMatchCase") == false && UserDefaults.standard.bool(forKey: "ImageWholeWord") == false && UserDefaults.standard.bool(forKey: "ImageMatchPrefix") == false && UserDefaults.standard.bool(forKey: "ImageMatchSuffix") == false)
                 {
                     for observation in observations
                     {
@@ -278,104 +284,145 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                         {
                             temp?.removeAll(where: {$0.isWhitespace})
                         }
-                        
-                        if(temp!.contains(self.searchedText))
+                        if(observation.topCandidates(1).first?.string.contains(self.searchedText))!
                         {
-                            //self.drawRectangle(char: observation)
-                            self.tempObservations.append(observation)
+                            self.drawRectangle(char: observation)
                         }
                     }
+                    if UserDefaults.standard.bool(forKey: "VoiceFeedback") == true
+                    {
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.stopSpeaking(at: .immediate)
+                        let speechUtterance = AVSpeechUtterance(string: "Search Finished")
+                        speechUtterance.voice = AVSpeechSynthesisVoice(language: "en")
+                        synthesizer.speak(speechUtterance)
+                        
+                    }
+                    
                 }
                 else
                 {
-                    self.tempObservations = observations
-                }
-                
-                
-                if UserDefaults.standard.bool(forKey: "ImageWholeWord") == true
-                {
-                    var wholeWordTemp = self.tempObservations
-                    self.tempObservations = []
-                    for observation in wholeWordTemp
+                    if UserDefaults.standard.bool(forKey: "ImageMatchCase") == true
                     {
-                        var wholeWordString = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
-                        
-                        for eachWord in wholeWordString!
+                        for observation in observations
                         {
-                            var temp = eachWord
+                            var temp = observation.topCandidates(1).first?.string
                             if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
                             {
-                                temp.removeAll(where: {$0.isPunctuation})
+                                temp?.removeAll(where: {$0.isPunctuation})
+                            }
+                            if UserDefaults.standard.bool(forKey: "ImageIgnoreWhiteSpace") == true
+                            {
+                                temp?.removeAll(where: {$0.isWhitespace})
                             }
                             
-                            if (temp.contains(self.searchedText.lowercased()))
+                            if(temp!.contains(self.searchedText))
                             {
-                                self.tempObservations.append(observation)
-                            }
-                        }
-                        
-                    }
-                }
-                
-                
-                if UserDefaults.standard.bool(forKey: "ImageMatchPrefix") == true
-                {
-                    var MatchPrefixTemp = self.tempObservations
-                    self.tempObservations = []
-                    for observation in MatchPrefixTemp
-                    {
-                        var temp = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
-                        for word in temp!
-                        {
-                            
-                            var matchPrefixString = word
-                            if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
-                            {
-                                matchPrefixString.removeAll(where: {$0.isPunctuation})
-                            }
-                            
-                            if matchPrefixString.prefix(self.searchedText.count).lowercased() == self.searchedText.lowercased()
-                            {
+                                //self.drawRectangle(char: observation)
                                 self.tempObservations.append(observation)
                             }
                         }
                     }
-                }
-                
-                
-                if UserDefaults.standard.bool(forKey: "ImageMatchSuffix") == true
-                {
-                    var MatchSuffixTemp = self.tempObservations
-                    self.tempObservations = []
-                    for observation in MatchSuffixTemp
+                    else
                     {
-                        var temp = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
-                        for word in temp!
-                        {
-                            var matchSuffixString = word
-                            if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
-                            {
-                                matchSuffixString.removeAll(where: {$0.isPunctuation})
-                            }
-                            
-                            if word.suffix(self.searchedText.count).lowercased() == self.searchedText.lowercased()
-                            {
-                                self.tempObservations.append(observation)
-                            }
-                        }
+                        self.tempObservations = observations
                     }
-                }
-                
-                
-                
-                
-                
-                
-                for x in self.tempObservations
-                {
                     
-                    self.drawRectangle(char: x)
+                    
+                    if UserDefaults.standard.bool(forKey: "ImageWholeWord") == true
+                    {
+                        var wholeWordTemp = self.tempObservations
+                        self.tempObservations = []
+                        for observation in wholeWordTemp
+                        {
+                            var wholeWordString = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
+                            
+                            for eachWord in wholeWordString!
+                            {
+                                var temp = eachWord
+                                if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
+                                {
+                                    temp.removeAll(where: {$0.isPunctuation})
+                                }
+                                
+                                if (temp.contains(self.searchedText.lowercased()))
+                                {
+                                    self.tempObservations.append(observation)
+                                }
+                            }
+                            
+                        }
+                    }
+                    
+                    
+                    if UserDefaults.standard.bool(forKey: "ImageMatchPrefix") == true
+                    {
+                        var MatchPrefixTemp = self.tempObservations
+                        self.tempObservations = []
+                        for observation in MatchPrefixTemp
+                        {
+                            var temp = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
+                            for word in temp!
+                            {
+                                
+                                var matchPrefixString = word
+                                if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
+                                {
+                                    matchPrefixString.removeAll(where: {$0.isPunctuation})
+                                }
+                                
+                                if matchPrefixString.prefix(self.searchedText.count).lowercased() == self.searchedText.lowercased()
+                                {
+                                    self.tempObservations.append(observation)
+                                }
+                            }
+                        }
+                    }
+                    
+                    
+                    if UserDefaults.standard.bool(forKey: "ImageMatchSuffix") == true
+                    {
+                        var MatchSuffixTemp = self.tempObservations
+                        self.tempObservations = []
+                        for observation in MatchSuffixTemp
+                        {
+                            var temp = observation.topCandidates(1).first?.string.lowercased().components(separatedBy: " ")
+                            for word in temp!
+                            {
+                                var matchSuffixString = word
+                                if UserDefaults.standard.bool(forKey: "ImageIgnorePunctuation") == true
+                                {
+                                    matchSuffixString.removeAll(where: {$0.isPunctuation})
+                                }
+                                
+                                if word.suffix(self.searchedText.count).lowercased() == self.searchedText.lowercased()
+                                {
+                                    self.tempObservations.append(observation)
+                                }
+                            }
+                        }
+                    }
+
+                    
+                    for x in self.tempObservations
+                    {
+                        
+                        self.drawRectangle(char: x)
+                    }
+                    
+                    if UserDefaults.standard.bool(forKey: "VoiceFeedback") == true
+                    {
+                        let synthesizer = AVSpeechSynthesizer()
+                        synthesizer.stopSpeaking(at: .immediate)
+                        let speechUtterance = AVSpeechUtterance(string: "Search Finished")
+                        speechUtterance.voice = AVSpeechSynthesisVoice(language: "en")
+                        synthesizer.speak(speechUtterance)
+                        
+                    }
                 }
+                    
+                    
+                
 
 
             }

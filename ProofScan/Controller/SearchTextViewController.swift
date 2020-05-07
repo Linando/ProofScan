@@ -79,6 +79,23 @@ class SearchTextViewController: UIViewController {
             if let text  = alert.textFields?.first?.text {
                 self.searchedText = text
             }
+            if UserDefaults.standard.bool(forKey: "VoiceFeedback") == true
+            {
+                let synthesizer = AVSpeechSynthesizer()
+                synthesizer.stopSpeaking(at: .immediate)
+                let speechUtterance = AVSpeechUtterance(string: "Start Searching")
+                speechUtterance.voice = AVSpeechSynthesisVoice(language: "en")
+                synthesizer.speak(speechUtterance)
+                
+            }
+            if UserDefaults.standard.bool(forKey: "HapticFeedback") == true
+            {
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.success)
+            }
+            
+            
+            
         }))
         alert.addTextField(configurationHandler: { textField in
             textField.placeholder = "Enter text here..."
@@ -144,7 +161,7 @@ class SearchTextViewController: UIViewController {
     func startTextRecognition(){
         let textRequest = VNRecognizeTextRequest(completionHandler: self.recognizeTextHandler)
         textRequest.usesLanguageCorrection = false
-        textRequest.customWords = ["susut", "luntur", " Penerima"]
+        //textRequest.customWords = ["susut", "luntur", " Penerima"]
         self.requests = [textRequest]
 
     }
