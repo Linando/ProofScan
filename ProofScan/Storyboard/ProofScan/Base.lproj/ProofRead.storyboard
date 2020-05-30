@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GIO-Ih-8Io">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GIO-Ih-8Io">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -284,11 +284,11 @@
             </objects>
             <point key="canvasLocation" x="406" y="2369"/>
         </scene>
-        <!--Proofread-->
+        <!--Image Scan-->
         <scene sceneID="eL8-xb-GPQ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GIO-Ih-8Io" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Proofread" image="textformat.abc.dottedunderline" catalog="system" id="9nH-jI-GhY"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GIO-Ih-8Io" userLabel="Image Scan" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Image Scan" image="textformat.abc.dottedunderline" catalog="system" id="9nH-jI-GhY"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7wU-Wj-aKL">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

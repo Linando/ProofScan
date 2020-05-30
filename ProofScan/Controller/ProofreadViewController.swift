@@ -284,7 +284,7 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                         {
                             temp?.removeAll(where: {$0.isWhitespace})
                         }
-                        if(observation.topCandidates(1).first?.string.contains(self.searchedText))!
+                        if(observation.topCandidates(1).first?.string.lowercased().contains(self.searchedText.lowercased()))!
                         {
                             self.drawRectangle(char: observation)
                         }
