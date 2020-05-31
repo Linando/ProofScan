@@ -345,7 +345,7 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                                     temp.removeAll(where: {$0.isPunctuation})
                                 }
                                 
-                                if (temp.contains(self.searchedText.lowercased()))
+                                if (temp == self.searchedText.lowercased())
                                 {
                                     self.tempObservations.append(observation)
                                 }
