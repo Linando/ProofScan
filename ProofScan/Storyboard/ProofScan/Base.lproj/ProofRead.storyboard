@@ -288,7 +288,9 @@
         <scene sceneID="eL8-xb-GPQ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GIO-Ih-8Io" userLabel="Image Scan" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Image Scan" image="textformat.abc.dottedunderline" catalog="system" id="9nH-jI-GhY"/>
+                    <tabBarItem key="tabBarItem" title="Image Scan" image="textformat.abc.dottedunderline" catalog="system" id="9nH-jI-GhY">
+                        <color key="badgeColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7wU-Wj-aKL">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

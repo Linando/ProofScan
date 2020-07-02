@@ -35,7 +35,7 @@ class SettingViewController: UIViewController {
         ///chech if theme is dark or light
         switch self.traitCollection.userInterfaceStyle {
         case .light, .unspecified:
-            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.systemBlue]
+            navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.systemPink]
             
         case .dark:
             navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.systemPink]
