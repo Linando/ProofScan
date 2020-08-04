@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  ProofreadViewController.swift
 //  ProofScan
 //
-//  Created by Linando Saputra on 01/04/20.
+//  Created by Stefandi Glivert on 01/04/20.
 //  Copyright © 2020 Linando Saputra. All rights reserved.
 //
 
@@ -271,6 +271,8 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
 //                        }
 //                    }
 //                }
+                
+                // MARK:- ADVANCED SETTINGS CASE
                 if (UserDefaults.standard.bool(forKey: "ImageMatchCase") == false && UserDefaults.standard.bool(forKey: "ImageWholeWord") == false && UserDefaults.standard.bool(forKey: "ImageMatchPrefix") == false && UserDefaults.standard.bool(forKey: "ImageMatchSuffix") == false)
                 {
                     for observation in observations
@@ -289,6 +291,7 @@ class ProofreadViewController: UIViewController, UIImagePickerControllerDelegate
                             self.drawRectangle(char: observation)
                         }
                     }
+                    //MARK:- Voice Feedback
                     if UserDefaults.standard.bool(forKey: "VoiceFeedback") == true
                     {
                         let synthesizer = AVSpeechSynthesizer()
