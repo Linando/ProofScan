@@ -2,7 +2,7 @@
 //  MatchCaseCell.swift
 //  ProofScan
 //
-//  Created by Linando Saputra on 02/05/20.
+//  Created by Ricky Erdiansyah on 02/05/20.
 //  Copyright © 2020 Linando Saputra. All rights reserved.
 //
 
